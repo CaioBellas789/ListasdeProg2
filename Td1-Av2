@@ -1,0 +1,326 @@
+   /*Contar Produtos Abaixo de um Valor: Crie um programa que conte quantos produtos têm um valor abaixo de um determinado valor fornecido pelo usuário.*/
+    
+    #define MAXPRODUTOS 100
+
+    typedef struct {
+        int id;
+        char nome[50];
+        float valor;
+    } Produto;
+
+    int contarprodutosabaixode(Produto produtos[], int quantidade, float valorlimite) {
+        int count = 0;
+        for (int i = 0; i < quantidade; i++) {
+            if (produtos[i].valor < valorlimite) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    int main() {
+        Produto produtos[MAXPRODUTOS];
+        int quantidade;
+
+        printf("Digite a quantidade de produtos: ");
+        scanf("%d", &quantidade);
+
+       
+        for (int i = 0; i < quantidade; i++) {
+            printf("Produto %d:\n", i + 1);
+            printf("ID: ");
+            scanf("%d", &produtos[i].id);
+            printf("Nome: ");
+            scanf(" %[^\n]s", produtos[i].nome);
+            printf("Valor: ");
+            scanf("%f", &produtos[i].valor);
+        }
+
+        float valorlimite;
+        printf("Digite o valor limite: ");
+        scanf("%f", &valorlimite);
+
+        int quantidadeabaixo = contarprodutosabaixode(produtos, quantidade, valorlimite);
+        printf("Quantidade de produtos abaixo de %.2f: %d\n", valorlimite, quantidadeabaixo);
+
+        
+   /* Buscar Produto pelo ID: Implemente um programa que permita ao usuário buscar um produto pelo ID. Se o produto for encontrado, exiba suas informações; caso contrário, informe que não foi encontrado.*/
+
+        #define MAXPRODUTOS 100
+
+        typedef struct {
+            int id;
+            char nome[50];
+            float valor;
+        } Produto;
+
+        Produto* buscarprodutoporid(Produto produtos[], int quantidade, int id) {
+            for (int i = 0; i < quantidade; i++) {
+                if (produtos[i].id == id) {
+                    return &produtos[i]; 
+                }
+            }
+            return NULL; 
+        }
+
+        int main() {
+            Produto produtos[MAXPRODUTOS];
+            int quantidade;
+            printf("Digite a quantidade de produtos: ");
+            scanf("%d", &quantidade);
+            
+            for (int i = 0; i < quantidade; i++) {
+                printf("Produto %d - ID: ", i + 1);
+                scanf("%d", &produtos[i].id);
+                printf("Nome: ");
+                scanf(" %[^\n]s", produtos[i].nome);
+                printf("Valor: ");
+                scanf("%f", &produtos[i].valor);
+            }
+
+            int idbusca;
+            printf("Digite o ID do produto a buscar: ");
+            scanf("%d", &idbusca);
+
+            Produto* produtoencontrado = buscarprodutoporid(produtos, quantidade, idbusca);
+            if (produtoencontrado) {
+                printf("Produto encontrado: ID: %d, Nome: %s, Valor: %.2f\n",
+                       produtoencontrado->id, produtoencontrado->nome, produtoencontrado->valor);
+            } else {
+                printf("Produto com ID %d não encontrado.\n", idbusca);
+            }
+  /* Atualizar Valor do Produto: Desenvolva um programa que permita ao usuário atualizar o valor de um produto com base no seu ID.*/
+            produto* buscarprodutoporid(Produto produtos[], int quantidade, int id) {
+                for (int i = 0; i < quantidade; i++)
+                    if (produtos[i].id == id) return &produtos[i];
+                return NULL;
+            }
+
+            int main() {
+                Produto produtos[MAXPRODUTOS];
+                int quantidade;
+
+                printf("Digite a quantidade de produtos: ");
+                scanf("%d", &quantidade);
+
+                for (int i = 0; i < quantidade; i++) {
+                    printf("Produto %d - ID: ", i + 1);
+                    scanf("%d", &produtos[i].id);
+                    printf("Nome: ");
+                    scanf(" %[^\n]s", produtos[i].nome);
+                    printf("Valor: ");
+                    scanf("%f", &produtos[i].valor);
+                }
+
+                int idatualizar;
+                printf("Digite o ID do produto a atualizar: ");
+                scanf("%d", &idatualizar);
+
+                Produto* produto = buscarprodutoporid(produtos, quantidade, idatualizar);
+                if (produto) {
+                    printf("Produto encontrado: %s, Valor atual: %.2f\n", produto->nome, produto->valor);
+                    printf("Novo valor: ");
+                    scanf("%f", &produto->valor);
+                    printf("Valor atualizado para: %.2f\n", produto->valor);
+                } else {
+                    printf("Produto com ID %d não encontrado.\n", idatualizar);
+                }
+
+   /*Calcular Média de Preços: Implemente um programa que calcule e retorne a média dos preços dos produtos.*/
+
+                int n, i;
+                float soma = 0, media;
+                printf("Digite o número de produtos: ");
+                scanf("%d", &n);
+
+                float precos[n];
+                for (i = 0; i < n; i++) {
+                    printf("Digite o preço do produto %d: ", i+1)
+        scanf("%f", &precos[i]);
+                    soma += precos[i];
+                }
+                media = soma / n;
+                printf("A média dos preços é: %.2f\n", media);
+                
+   /* Exibir Produtos Acima da Média: Crie um programa que exiba todos os produtos cujo preço é superior à média calculada.*/
+    int main() {
+    int n, i;
+    float soma = 0, media;
+
+               
+        printf("Digite o número de produtos: ");
+        scanf("%d", &n);
+            float precos[n];
+             for (i = 0; i < n; i++) {
+        printf("Digite o preço do produto %d: ", i+1);
+        scanf("%f", &precos[i]);
+            soma += precos[i];
+    }
+    media = soma / n;
+    printf("A média dos preços é: %.2f\n", media);
+                    
+    printf("Produtos acima da média:\n");
+        for (i = 0; i < n; i++) {
+            if (precos[i] > media) {
+             printf("Produto %d: %.2f\n", i+1, precos[i]);
+                        }
+                    }
+
+
+        /*Segunda parte */
+        
+/*Cadastro de Clubes: Crie um programa que permita ao usuário cadastrar um número determinado de clubes (por exemplo, 10). Para cada clube, solicite que o usuário insira o ID, nome, vitórias, empates, derrotas, gols pró e gols contra. O programa deve calcular a pontuação de cada clube com base em suas vitórias, empates e derrotas. A pontuação deve ser calculada da seguinte forma: 3 pontos por vitória, 1 ponto por empate, 0 pontos por derrota. Exiba a pontuação total de cada clube.*/
+
+        #define MAXCLUBES 10
+
+        typedef struct {
+            int id;
+            char nome[50];
+            int vitorias, empates, derrotas, golspro, golscontra;
+            int pontos;
+        } Clube;
+
+        int main() {
+            Clube clubes[MAXCLUBES];
+            int n, i;
+
+        printf("Digite o número de clubes (máximo %d): ", MAXCLUBES);
+            scanf("%d", &n);
+
+            if (n > MAXCLUBES) {
+                printf("Número de clubes excede o limite.\n");
+                return 1;
+            }
+
+            for (i = 0; i < n; i++) {
+                printf("\nClube %d\n", i+1);
+                printf("ID: ");
+                scanf("%d", &clubes[i].id);
+                printf("Nome: ");
+                scanf("%s", clubes[i].nome);
+                printf("Vitórias: ");
+                scanf("%d", &clubes[i].vitorias);
+                printf("Empates: ");
+                scanf("%d", &clubes[i].empates);
+                printf("Derrotas: ");
+                scanf("%d", &clubes[i].derrotas);
+                printf("Gols pró: ");
+                scanf("%d", &clubes[i].golspro);
+                printf("Gols contra: ");
+                scanf("%d", &clubes[i].golscontra);
+
+                clubes[i].pontos = 3 * clubes[i].vitorias + clubes[i].empates;
+            }
+
+            printf("\nPontuação dos clubes:\n");
+            for (i = 0; i < n; i++) {
+                printf("Clube %d (%s): %d pontos\n", clubes[i].id, clubes[i].nome, clubes[i].pontos);
+            }
+        
+/*Buscar Clube pelo ID:  Desenvolva um programa que permita ao usuário buscar um clube pelo ID. Se o  clube for encontrado, exiba suas informações; caso contrário, informe que não foi encontrado.*/
+            #define MAXCLUBES 10
+
+            typedef struct {
+                int id;
+                char nome[50];
+                int vitorias, empates, derrotas, golspro, golscontra;
+                int pontos;
+            } Clube;
+
+            int main() {
+                Clube clubes[MAXCLUBES];
+                int n, i;
+
+                printf("Digite o número de clubes (máximo %d): ", MAXCLUBES);
+                    scanf("%d", &n);
+
+                    if (n > MAXCLUBES) {
+                        printf("Número de clubes excede o limite.\n");
+
+              
+                int id_buscado;
+                printf("\nDigite o ID do clube que deseja buscar: ");
+                scanf("%d", &idbuscado);
+
+                int encontrado = 0;
+                for (int i = 0; i < n; i++) {
+                    if (clubes[i].id == idbuscado) {
+                        printf("\nClube encontrado:\n");
+                        printf("ID: %d\n", clubes[i].id);
+                        printf("Nome: %s\n", clubes[i].nome);
+    
+            encontrado = 1;
+            break; 
+                    }
+                }
+
+                if (!encontrado) {
+                    printf("Clube não encontrado.\n");
+                }
+
+                        
+        /*Exibir Clubes com Gols Pró Acima da Média: Crie um programa que calcule a média de gols pró de todos os clubes e exiba apenas os clubes que têm um número de gols pró superior a essa média.*/
+        
+/*Exibir saldo de gols: Crie um programa que calcule o saldo de gols de todos os clubes e exiba o nome e o saldo de cada clube.*/
+    #define MAXCLUBES 10
+
+    typedef struct {
+    int id;
+    char nome[50];
+    int vitorias, empates, derrotas, golspro, golscontra;
+        int pontos;
+        } Clube;
+
+    int main() {
+    Clube clubes[MAXCLUBES];
+     printf("Digite o número de clubes (máximo %d): ", MAXCLUBES);
+    scanf("%d", &n);
+    if (n > MAXCLUBES) {
+    printf("Número de clubes excede o limite.\n");
+
+        int somagolspro = 0;
+        float mediagolspro;
+        for (int i = 0; i < n; i++) {
+        somagolspro += clubes[i].golspro;
+        }
+        mediagolspro = (float)somagolspro / n;
+
+       
+    printf("\nClubes com gols pró acima da média (%.2f):\n", mediagolspro);
+    for (int i = 0; i < n; i++) {
+    if (clubes[i].golspro > mediagolspro) {
+printf("ID: %d, Nome: %s, Gols pró: %d\n", 
+clubes[i].id, clubes[i].nome, clubes[i].golspro);
+         }
+    } 
+        /*Exibir dados do melhor e do pior clube: Crie um programa que exiba os dados do clube campeão e do último colocado.*/
+
+
+        #define MAXCLUBES 10
+
+        typedef struct {
+            int id;
+            char nome[50];
+            int vitorias, empates, derrotas, golspro, golscontra;
+            int pontos;
+        } Clube;
+
+        int main() {
+            Clube clubes[MAXCLUBES];
+            int melhorindice = 0, piorindice = 0;
+            for (int i = 1; i < n; i++) {
+                if (clubes[i].pontos > clubes[melhorindice].pontos) {
+                    melhorindice = i;
+                } else if (clubes[i].pontos < clubes[piorindice].pontos) {
+                    piorindice = i;
+                }
+            }
+
+          
+            printf("\nCampeão:\n");
+            printf("ID: %d, Nome: %s, Pontos: %d\n", 
+                   clubes[melhorindice].id, clubes[melhorindice].nome, clubes[melhorindice].pontos);
+
+            printf("\nÚltimo colocado:\n");
+            printf("ID: %d, Nome: %s, Pontos: %d\n", 
+                   clubes[piorindice].id, clubes[piorindice].nome, clubes[piorindice].pontos);
